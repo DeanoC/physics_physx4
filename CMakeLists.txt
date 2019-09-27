@@ -52,11 +52,15 @@ set( TestDeps
 
 		utils_simple_logmanager)
 ADD_LIB_TESTS(${LibName} "${Interface}" "${Tests}" "${TestDeps}")
-if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-	target_compile_definitions(${LibName} PUBLIC _DEBUG)
-elseif ()
+if(${CMAKE_BUILD_TYPE})
+	if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+		target_compile_definitions(${LibName} PUBLIC _DEBUG)
+	elseif ()
+		target_compile_definitions(${LibName} PUBLIC NDEBUG)
+	endif ()
+elseif()
 	target_compile_definitions(${LibName} PUBLIC NDEBUG)
-endif ()
+endif()
 
 set(PHYSX_SOURCE_SIMULATION_CONTROLLER
 		simulationcontroller/src/ScTriggerPairs.h
