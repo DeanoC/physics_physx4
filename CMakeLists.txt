@@ -53,7 +53,7 @@ set( TestDeps
 		utils_simple_logmanager)
 ADD_LIB_TESTS(${LibName} "${Interface}" "${Tests}" "${TestDeps}")
 
-if(WIN32)
+if(${CMAKE_BUILD_TYPE} AND WIN32 )
 	if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 		target_compile_definitions(${LibName} PUBLIC _DEBUG)
 	else ()
