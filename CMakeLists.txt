@@ -53,7 +53,13 @@ set( TestDeps
 		utils_simple_logmanager)
 ADD_LIB_TESTS(${LibName} "${Interface}" "${Tests}" "${TestDeps}")
 
+
+
+if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+	target_compile_definitions(${LibName} PUBLIC _DEBUG)
+else()
 	target_compile_definitions(${LibName} PUBLIC NDEBUG)
+endif()
 
 target_compile_definitions(${LibName} PRIVATE DISABLE_CUDA_PHYSX PX_PHYSX_STATIC_LIB)
 
