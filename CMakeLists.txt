@@ -53,20 +53,6 @@ set( TestDeps
 		utils_simple_logmanager)
 ADD_LIB_TESTS(${LibName} "${Interface}" "${Tests}" "${TestDeps}")
 
-if(${CMAKE_BUILD_TYPE})
-	message( ${CMAKE_BUILD_TYPE} )
-	if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-		target_compile_definitions(${LibName} PUBLIC _DEBUG)
-	elseif ()
-		target_compile_definitions(${LibName} PUBLIC NDEBUG)
-	endif ()
-elseif()
-	message( "No build type so setting NDEBUG")
-	target_compile_definitions(${LibName} PUBLIC NDEBUG)
-endif()
-
-target_compile_definitions(${LibName} PRIVATE DISABLE_CUDA_PHYSX PX_PHYSX_STATIC_LIB)
-
 set(PHYSX_SOURCE_SIMULATION_CONTROLLER
 		simulationcontroller/src/ScTriggerPairs.h
 		simulationcontroller/src/ScTriggerInteraction.h
