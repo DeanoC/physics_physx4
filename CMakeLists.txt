@@ -53,6 +53,10 @@ set( TestDeps
 		utils_simple_logmanager)
 ADD_LIB_TESTS(${LibName} "${Interface}" "${Tests}" "${TestDeps}")
 
+	target_compile_definitions(${LibName} PUBLIC NDEBUG)
+
+target_compile_definitions(${LibName} PRIVATE DISABLE_CUDA_PHYSX PX_PHYSX_STATIC_LIB)
+
 set(PHYSX_SOURCE_SIMULATION_CONTROLLER
 		simulationcontroller/src/ScTriggerPairs.h
 		simulationcontroller/src/ScTriggerInteraction.h
