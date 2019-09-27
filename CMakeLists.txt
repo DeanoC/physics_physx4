@@ -61,6 +61,7 @@ if(${CMAKE_BUILD_TYPE})
 elseif()
 	target_compile_definitions(${LibName} PUBLIC NDEBUG)
 endif()
+target_compile_definitions(${LibName} PRIVATE DISABLE_CUDA_PHYSX PX_PHYSX_STATIC_LIB)
 
 set(PHYSX_SOURCE_SIMULATION_CONTROLLER
 		simulationcontroller/src/ScTriggerPairs.h
@@ -1079,6 +1080,21 @@ if (APPLE OR UNIX)
 			foundation/src/unix/PsUnixAtomic.cpp
 			)
 endif ()
+if (WIN32)
+	list(APPEND PHYSX_SOURCE_FOUNDATION
+			foundation/src/windows/PsWindowsAtomic.cpp
+			foundation/src/windows/PsWindowsCpu.cpp
+			foundation/src/windows/PsWindowsFPU.cpp
+			foundation/src/windows/PsWindowsMutex.cpp
+			foundation/src/windows/PsWindowsPrintString.cpp
+			foundation/src/windows/PsWindowsSList.cpp
+			foundation/src/windows/PsWindowsSocket.cpp
+			foundation/src/windows/PsWindowsSync.cpp
+			foundation/src/windows/PsWindowsThread.cpp
+			foundation/src/windows/PsWindowsTime.cpp
+			)
+endif ()
+
 target_include_directories(${LibName} PRIVATE ${nvidiagameworks_physx_SOURCE_DIR}/physx/source/foundation/include)
 
 set(PHYSX_SOURCE_FILEBUF
